@@ -13,8 +13,9 @@ def print_date():
 
 
 def print_random_quote():
-    response = requests.get('https://api.quotable.io/random')
-    quote = response.json()['content']
+    # response = requests.get('https://api.quotable.io/random')
+    # quote = response.json()['content']
+    quote = 'this is a test string quote'
     print('Quote of the day: "{}"'.format(quote))
 
 
