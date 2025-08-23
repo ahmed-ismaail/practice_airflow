@@ -4,4 +4,3 @@ airflow.db
 airflow.db-shm
 airflow.db-wal
 simple_auth_manager_password.json.generated
-__pycache__/
