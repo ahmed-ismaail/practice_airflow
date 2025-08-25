@@ -1,7 +1,11 @@
 
 services:
   airflowproject:
-    image: airflowproject:latest
+    # image: airflowproject:latest
+    
+    build:
+      context: .
+      dockerfile: Dockerfile
 
     volumes:
       - ./airflow:/opt/airflow
