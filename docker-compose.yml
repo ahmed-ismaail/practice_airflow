@@ -12,11 +12,13 @@ services:
     command: airflow standalone
 
     environment:
-      - AIRFLOW__SMTP__SMTP_HOST=airflow-smtp
-      - AIRFLOW__SMTP__SMTP_PORT=25
+      - AIRFLOW__SMTP__SMTP_HOST=mailhog
+      - AIRFLOW__SMTP__SMTP_PORT=1025
+      - AIRFLOW__SMTP__SMTP_MAIL_FROM=airflow@example.com
       - AIRFLOW__SMTP__SMTP_STARTTLS=False
       - AIRFLOW__SMTP__SMTP_SSL=False
-      - AIRFLOW__SMTP__SMTP_MAIL_FROM=airflow@example.com
-  airflow-smtp: # this is used by Airflow to send emails
-    image: namshi/smtp
-    restart: always
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"  # Web UI
+      - "1025:1025"  # SMTP Port

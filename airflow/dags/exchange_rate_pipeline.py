@@ -33,7 +33,7 @@ download_task = BashOperator(
     # this command curl stands for "Client URL" and is used to transfer data from or to a server
     # the -o option is used to specify the output file name
     # the URL is the location of the file to be downloaded
-    bash_command='curl -o xrate.csv https://data-api.ecb.europa.eu/service/data/EXR/M.USD.EUR.SP00.A?format=csvdata', # Command to download the file
+    bash_command="curl -o xrate.csv '{{ var.value.get('rate_api_url')}}'", # Command to download the file
     cwd='/tmp', # cwd stand for "current working directory" to Change to /tmp directory before executing the command
     dag=dag, # Associate this task with the DAG defined above
 )
@@ -47,7 +47,7 @@ clean_data_task = PythonOperator(
 
 send_email_task = EmailOperator(
     task_id='send_email', # Task name
-    to='ahmedmohamed.ismaail@gmail.com', # Recipient email address
+    to="{{ var.value.get('email') }}", # Recipient email address
     subject='Exchange Rate Download - Successful', # Email subject
     html_content='The Exchange Rate data has been successfully downloaded, cleaned, and loaded.', # Email body content
     dag=dag,
