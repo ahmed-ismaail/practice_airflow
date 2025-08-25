@@ -1,8 +1,6 @@
-version: '3'
 
 services:
   airflowproject:
-
     image: airflowproject:latest
 
     volumes:
@@ -12,3 +10,13 @@ services:
       - "8080:8080"
 
     command: airflow standalone
+
+    environment:
+      - AIRFLOW__SMTP__SMTP_HOST=airflow-smtp
+      - AIRFLOW__SMTP__SMTP_PORT=25
+      - AIRFLOW__SMTP__SMTP_STARTTLS=False
+      - AIRFLOW__SMTP__SMTP_SSL=False
+      - AIRFLOW__SMTP__SMTP_MAIL_FROM=airflow@example.com
+  airflow-smtp: # this is used by Airflow to send emails
+    image: namshi/smtp
+    restart: always
